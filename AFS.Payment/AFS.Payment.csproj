@@ -148,15 +148,33 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BusinessObjects\CardValidator\JsonPlaceholderValidator.cs" />
+    <Compile Include="BusinessObjects\Orders.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
+    <Compile Include="DataAccess\Item.cs" />
+    <Compile Include="DataAccess\Order.cs" />
+    <Compile Include="DataAccess\PaymentContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CardValidator\BinCodesValidator.cs" />
-    <Compile Include="Models\CardValidator\CardValidator.cs" />
-    <Compile Include="Models\CreditCard.cs" />
-    <Compile Include="Models\Order.cs" />
+    <Compile Include="Migrations\201901140059571_Initial.cs" />
+    <Compile Include="Migrations\201901140059571_Initial.Designer.cs">
+      <DependentUpon>201901140059571_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="BusinessObjects\CardValidator\BinCodesValidator.cs" />
+    <Compile Include="BusinessObjects\CardValidator\CardValidator.cs" />
+    <Compile Include="BusinessObjects\CreditCard.cs" />
+    <Compile Include="Models\OrderModel.cs" />
+    <Compile Include="Models\WelcomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Option.cs" />
+    <Compile Include="Utility\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-datepicker.css" />
@@ -191,6 +209,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -298,8 +320,8 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Payment\About.cshtml" />
-    <Content Include="Views\Payment\Contact.cshtml" />
     <Content Include="Views\Payment\Welcome.cshtml" />
+    <Content Include="Views\Payment\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,14 +331,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AFS.Payment.Data\AFS.Payment.Data.csproj">
-      <Project>{539b62c0-b5d3-4007-8d50-0e5ae6bd2242}</Project>
-      <Name>AFS.Payment.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AFS.Payment.Utility\AFS.Payment.Utility.csproj">
-      <Project>{261825a9-6653-4bba-b89f-5644c76fa128}</Project>
-      <Name>AFS.Payment.Utility</Name>
-    </ProjectReference>
+    <EmbeddedResource Include="Migrations\201901140059571_Initial.resx">
+      <DependentUpon>201901140059571_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

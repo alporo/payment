@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AFS.Payment.Data
+namespace AFS.Payment.DataAccess
 {
     public class Item
     {

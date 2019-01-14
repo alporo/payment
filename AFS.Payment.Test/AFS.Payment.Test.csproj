@@ -53,31 +53,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Integration\BinCodesValidatorTests.cs" />
+    <Compile Include="Integration\JsonPlaceholderValidatorTests.cs" />
     <Compile Include="Integration\OrderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Unit\OrdersTests.cs" />
+    <Compile Include="Unit\WelcomeModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AFS.Payment.Data\AFS.Payment.Data.csproj">
-      <Project>{539b62c0-b5d3-4007-8d50-0e5ae6bd2242}</Project>
-      <Name>AFS.Payment.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AFS.Payment.Utility\AFS.Payment.Utility.csproj">
-      <Project>{261825a9-6653-4bba-b89f-5644c76fa128}</Project>
-      <Name>AFS.Payment.Utility</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\AFS.Payment\AFS.Payment.UI.csproj">
+    <ProjectReference Include="..\AFS.Payment\AFS.Payment.csproj">
       <Project>{6492fa36-e542-4842-946e-23b5c7fd561d}</Project>
-      <Name>AFS.Payment.UI</Name>
+      <Name>AFS.Payment</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Unit\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

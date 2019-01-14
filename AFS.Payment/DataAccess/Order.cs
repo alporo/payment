@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace AFS.Payment.Data
+namespace AFS.Payment.DataAccess
 {
     public class Order
     {

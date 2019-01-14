@@ -1,13 +1,14 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace AFS.Payment.Data
+namespace AFS.Payment.DataAccess
 {
     public class PaymentContext : DbContext
     {
         public PaymentContext() : base("name=PaymentDbConnection")
         {
             Database.SetInitializer(new CreateDatabaseIfNotExists<PaymentContext>());
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Order> Orders { get; set; }

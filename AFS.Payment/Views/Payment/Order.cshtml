@@ -1,0 +1,35 @@
+﻿@model AFS.Payment.Models.OrderModel
+
+@{
+    ViewBag.Title = "Order";
+}
+
+<h2>Order details</h2>
+
+<div>
+    <h4>Summary</h4>
+    <hr/>
+    <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Fullname)</dt>
+        <dd>@Html.DisplayFor(model => model.Fullname)</dd>
+        <dt>@Html.DisplayNameFor(model => model.Total)</dt>
+        <dd>@Html.DisplayFor(model => model.Total)</dd>
+    </dl>
+</div>
+<div>
+    <h4>Items</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-2"> <strong>Product</strong></div>
+        <div class="col-md-2"> <strong>Quantity</strong></div>
+        <div class="col-md-2"> <strong>Price</strong></div>
+    </div>
+    @foreach (var item in Model.Items)
+    {
+        <div class="row">
+            <div class="col-md-2"> @Html.DisplayFor(modelItem => item.Product)</div>
+            <div class="col-md-2"> @Html.DisplayFor(modelItem => item.Quantity)</div>
+            <div class="col-md-2"> @Html.DisplayFor(modelItem => item.Price)</div>
+        </div>
+    }
+</div>

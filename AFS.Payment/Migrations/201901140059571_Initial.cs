@@ -1,4 +1,4 @@
-namespace AFS.Payment.Data.Migrations
+namespace AFS.Payment.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

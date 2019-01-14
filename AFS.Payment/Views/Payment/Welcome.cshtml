@@ -1,4 +1,4 @@
-﻿@model AFS.Payment.Models.Order
+﻿@model AFS.Payment.Models.WelcomeModel
 @{
     ViewBag.Title = "Home Page";
 }
@@ -8,12 +8,18 @@
         Simplified payment <img class="commectial-pict-big" src="../../Content/pict/devices.png">
     </h1>
 </div>
+@if (Model.DateInvalid)
+{
+    <div class="alert alert-danger">
+        <strong>Date of birth error!</strong> Check that date is valid.
+    </div>
+}
 <div class="panel panel-default">
     <div class="panel-body">
-        @using (Html.BeginForm("OrderDetails", "Payment", FormMethod.Post, new { @class = "toOrderForm" }))
+        @using (Html.BeginForm("Order", "Payment", FormMethod.Post, new { @class = "toOrderForm" }))
         {
-            @Html.HiddenFor(m => m.Id)
-            @Html.HiddenFor(m => m.DateOfBirth)
+            @Html.HiddenFor(m => m.OrderId)
+            @Html.HiddenFor(m => m.DateOfBirthString)
             <div class="row">
                 <div class="col-md-12">
                     <p>
@@ -24,17 +30,19 @@
             <div class="row">
                 <div class="col-md-3" id="dtp">
                     <div class="input-group date">
-                        <input type="text" class="form-control" placeholder="Date of birth"><span class="input-group-addon">
+                        <input type="text" class="form-control" placeholder="Date of birth">
+                        <span class="input-group-addon">
                             <i class="glyphicon glyphicon-th"></i>
                         </span>
                     </div>
-                    @Html.ValidationMessageFor(m => m.DateOfBirth)
+                    @Html.ValidationMessageFor(m => m.DateOfBirthString)
                 </div>
                 <button type="submit" class="btn btn-primary">Order details</button>
             </div>
         }
     </div>
 </div>
+
 
 
 <div class="row">
@@ -92,9 +100,8 @@
                 autoclose: true
             });
             dtp.on('changeDate',
-                function(e) {
-                    var month = e.date.getMonth() + 1;
-                    $('#DateOfBirth').val(e.date.getDate() + '.' + month + '.' + e.date.getFullYear());
+                function (e) {
+                    $('#DateOfBirthString').val(Date.parse(e.date));
                 });
             $(".toOrderForm").data("validator").settings.ignore = "";
         });
