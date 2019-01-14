@@ -1,0 +1,102 @@
+﻿@model AFS.Payment.Models.Order
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>
+        Simplified payment <img class="commectial-pict-big" src="../../Content/pict/devices.png">
+    </h1>
+</div>
+<div class="panel panel-default">
+    <div class="panel-body">
+        @using (Html.BeginForm("OrderDetails", "Payment", FormMethod.Post, new { @class = "toOrderForm" }))
+        {
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.DateOfBirth)
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        <label>To continue with the payment enter your date of birth</label>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3" id="dtp">
+                    <div class="input-group date">
+                        <input type="text" class="form-control" placeholder="Date of birth"><span class="input-group-addon">
+                            <i class="glyphicon glyphicon-th"></i>
+                        </span>
+                    </div>
+                    @Html.ValidationMessageFor(m => m.DateOfBirth)
+                </div>
+                <button type="submit" class="btn btn-primary">Order details</button>
+            </div>
+        }
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>
+            <img class="commectial-pict" src="../../Content/pict/secure.png"> Secure
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus ornare posuere.
+            Aliquam in felis ex. Sed aliquet risus in ornare dictum. Nunc posuere,
+            mauris in mattis scelerisque, mi mi luctus eros, vitae semper ipsum nisi ut ligula.
+            Donec nec mauris volutpat, pulvinar ante nec, pellentesque velit.
+        </p>
+        <p>
+            <a class="btn btn-default" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>
+            <img class="commectial-pict" src="../../Content/pict/reliable.png"> Reliable
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a neque sit amet mi pretium auctor.
+            Integer ac ex id ex venenatis suscipit. Integer vitae consectetur quam, ac eleifend magna.
+            Nullam bibendum lectus venenatis nibh rutrum, vitae congue nisl gravida.
+            Quisque sodales mauris quis massa feugiat, at blandit ante fermentum.
+        </p>
+        <p>
+            <a class="btn btn-default" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>
+            <img class="commectial-pict" src="../../Content/pict/dynamic.png"> Dynamic
+        </h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Integer tincidunt sapien aliquam turpis pretium, sed fermentum arcu fringilla.
+            Proin blandit ante sit amet pretium placerat. Quisque ornare odio eget magna tempor commodo.
+            Aenean ultricies est vel placerat efficitur. Donec maximus cursus nibh, sit amet malesuada ligula consectetur sed.
+            Pellentesque pretium porta lacus et venenatis. Fusce bibendum libero a augue sodales commodo.
+        </p>
+        <p>
+            <a class="btn btn-default" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
+        </p>
+    </div>
+</div>
+
+@section CustomScripts
+{
+    <script>
+        $(document).ready(function() {
+            var dtp = $('#dtp .input-group.date').datepicker({
+                format: 'dd.mm.yyyy',
+                autoclose: true
+            });
+            dtp.on('changeDate',
+                function(e) {
+                    var month = e.date.getMonth() + 1;
+                    $('#DateOfBirth').val(e.date.getDate() + '.' + month + '.' + e.date.getFullYear());
+                });
+            $(".toOrderForm").data("validator").settings.ignore = "";
+        });
+    </script>
+}
