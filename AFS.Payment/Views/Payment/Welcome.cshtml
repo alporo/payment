@@ -1,6 +1,6 @@
 ﻿@model AFS.Payment.Models.WelcomeModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Simplified payment";
 }
 
 <div class="jumbotron">
@@ -8,12 +8,6 @@
         Simplified payment <img class="commectial-pict-big" src="../../Content/pict/devices.png">
     </h1>
 </div>
-@if (Model.DateInvalid)
-{
-    <div class="alert alert-danger">
-        <strong>Date of birth error!</strong> Check that date is valid.
-    </div>
-}
 <div class="panel panel-default">
     <div class="panel-body">
         @using (Html.BeginForm("Order", "Payment", FormMethod.Post, new { @class = "toOrderForm" }))

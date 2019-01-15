@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace AFS.Payment
@@ -16,7 +12,7 @@ namespace AFS.Payment
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Payment", action = "Welcome", id = UrlParameter.Optional }
+                defaults: new { controller = "Payment", action = "GenerateLink", id = UrlParameter.Optional }
             );
         }
     }

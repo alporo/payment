@@ -1,0 +1,10 @@
+﻿@model AFS.Payment.Models.GenerateLinkModel
+@{
+    ViewBag.Title = "Generate link";
+}
+<h2>@ViewBag.Title</h2>
+<h3>@ViewBag.Message</h3>
+
+<p>This page should not be visible to the end users, but for admins to generate payment link.</p>
+<p>@Html.ActionLink("Generated link to random order", "Welcome", "Payment", new { id = Model.OrderId }, null)</p>
+<p>Date of birth to proceed with this order is @Model.DateOfBirth.ToShortDateString()</p>

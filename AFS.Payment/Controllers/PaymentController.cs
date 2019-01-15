@@ -7,21 +7,38 @@ namespace AFS.Payment.Controllers
 {
     public class PaymentController : Controller
     {
-        public ActionResult Welcome(Guid id) => WelcomeView(id, false);
+        private readonly Orders _orders;
 
-        public ActionResult WelcomeRetry(Guid id) => WelcomeView(id, true);
+        public PaymentController(Orders orders)
+        {
+            _orders = orders;
+        }
 
-        private ActionResult WelcomeView(Guid orderId, bool dateInvalid)
-            => new Orders().GetBy(orderId)
-                .Map(o => View("Welcome", new WelcomeModel {OrderId = orderId, DateInvalid = dateInvalid}))
+        public PaymentController() : this(new Orders())
+        {
+        }
+
+        public ActionResult GenerateLink() =>
+            _orders.GetRandom().Map(o => View(new GenerateLinkModel(o))).OrElse(View("Error"));
+
+        public ActionResult Welcome(Guid id) =>
+            _orders.GetBy(id)
+                .Map(o => View("Welcome", new WelcomeModel {OrderId = id}))
                 .OrElse(View("Error"));
 
         [HttpPost]
-        public ActionResult Order(WelcomeModel welcome) => !ModelState.IsValid
-            ? View("Error")
-            : new Orders().GetBy(welcome.OrderId, welcome.DateOfBirth).Map(o => View(new OrderModel(o)) as ActionResult)
-                .OrElse(RedirectToAction("WelcomeRetry", new {Id = welcome.OrderId}));
+        public ActionResult Order(WelcomeModel welcome) =>
+            !ModelState.IsValid
+                ? View("Error") as ActionResult
+                : RedirectToAction("Order", new {orderId = welcome.OrderId, dateOfBirth = welcome.DateOfBirth});
 
-
+        public ActionResult Order(Guid orderId, DateTime dateOfBirth) =>
+            _orders.View(orderId, dateOfBirth)
+                .Map(o => View(new OrderModel(o)) as ActionResult)
+                .OrElse(() =>
+                {
+                    ViewBag.ErrorMessage = "Date of birth is invalid";
+                    return Welcome(orderId);
+                });
     }
 }

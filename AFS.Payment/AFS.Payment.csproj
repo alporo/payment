@@ -165,6 +165,7 @@
     <Compile Include="BusinessObjects\CardValidator\BinCodesValidator.cs" />
     <Compile Include="BusinessObjects\CardValidator\CardValidator.cs" />
     <Compile Include="BusinessObjects\CreditCard.cs" />
+    <Compile Include="Models\GenerateLinkModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\WelcomeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -322,6 +323,7 @@
     <Content Include="Views\Payment\About.cshtml" />
     <Content Include="Views\Payment\Welcome.cshtml" />
     <Content Include="Views\Payment\Order.cshtml" />
+    <Content Include="Views\Payment\GenerateLink.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

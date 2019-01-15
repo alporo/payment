@@ -9,6 +9,7 @@ namespace AFS.Payment.Utility
         Option<TO> Map<TO>(Func<T, TO?> func) where TO : struct;
         Option<T> Map(Action<T> action);
         T OrElse(T defaultValue);
+        T OrElse(Func<T> defaultFunc);
         T OrThrow(Exception e);
         bool HasValue();
     }
@@ -38,6 +39,8 @@ namespace AFS.Payment.Utility
         }
 
         public T OrElse(T defaultValue) => _value;
+        public T OrElse(Func<T> defaultFunc) => _value;
+
         public T OrThrow(Exception e) => _value;
 
         public bool HasValue() => true;
@@ -51,6 +54,8 @@ namespace AFS.Payment.Utility
 
         public Option<T> Map(Action<T> action) => this;
         public T OrElse(T defaultValue) => defaultValue;
+        public T OrElse(Func<T> defaultFunc) => defaultFunc();
+
         public T OrThrow(Exception e) { throw e; } 
 
         public bool HasValue() => false;
