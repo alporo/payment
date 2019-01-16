@@ -8,8 +8,8 @@
         Simplified payment <img class="commectial-pict-big" src="../../Content/pict/devices.png">
     </h1>
 </div>
-<div class="panel panel-default">
-    <div class="panel-body">
+<div class="card">
+    <div class="card-body">
         @using (Html.BeginForm("Order", "Payment", FormMethod.Post, new { @class = "toOrderForm" }))
         {
             @Html.HiddenFor(m => m.OrderId)
@@ -26,7 +26,7 @@
                     <div class="input-group date">
                         <input type="text" class="form-control" placeholder="Date of birth">
                         <span class="input-group-addon">
-                            <i class="glyphicon glyphicon-th"></i>
+                            <i>D</i>
                         </span>
                     </div>
                     @Html.ValidationMessageFor(m => m.DateOfBirthString)
@@ -51,7 +51,7 @@
             Donec nec mauris volutpat, pulvinar ante nec, pellentesque velit.
         </p>
         <p>
-            <a class="btn btn-default" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
+            <a class="btn btn-light" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
         </p>
     </div>
     <div class="col-md-4">
@@ -65,7 +65,7 @@
             Quisque sodales mauris quis massa feugiat, at blandit ante fermentum.
         </p>
         <p>
-            <a class="btn btn-default" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
+            <a class="btn btn-light" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
         </p>
     </div>
     <div class="col-md-4">
@@ -80,7 +80,7 @@
             Pellentesque pretium porta lacus et venenatis. Fusce bibendum libero a augue sodales commodo.
         </p>
         <p>
-            <a class="btn btn-default" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
+            <a class="btn btn-light" href="http://arvato.ee/" target="_blank">Learn more &raquo;</a>
         </p>
     </div>
 </div>
