@@ -6,6 +6,7 @@ namespace AFS.Payment.DataAccess
 {
     public class Order
     {
+        // and yes, I prefer Guid over int as ID
         public Guid Id { get; set; }
         public DateTime DateOfBirth { get; set; }
         public decimal Total { get; set; }

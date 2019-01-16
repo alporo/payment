@@ -2,9 +2,12 @@
 
 namespace AFS.Payment.Utility
 {
+    /*
+     * Option is another way to avoid null check nuisance
+     * Please read further https://alvinalexander.com/scala/best-practice-eliminate-null-values-from-code-scala-idioms
+     */
     public interface Option<T>
     {
-        Option<TO> Map<TO>(Func<T, Option<TO>> func) where TO : class;
         Option<TO> Map<TO>(Func<T, TO> func) where TO : class;
         Option<TO> Map<TO>(Func<T, TO?> func) where TO : struct;
         Option<T> Map(Action<T> action);
@@ -23,7 +26,7 @@ namespace AFS.Payment.Utility
                 throw new ArgumentNullException(nameof(value));
             _value = value;
         }
-        public Option<TO> Map<TO>(Func<T, Option<TO>> func) where TO : class => func(_value);
+
         public Option<TO> Map<TO>(Func<T, TO> func) where TO : class => new Some<TO>(func(_value));
 
         public Option<TO> Map<TO>(Func<T, TO?> func) where TO : struct
@@ -48,7 +51,6 @@ namespace AFS.Payment.Utility
 
     public class None<T> : Option<T>
     {
-        public Option<TO> Map<TO>(Func<T, Option<TO>> func) where TO : class => new None<TO>();
         public Option<TO> Map<TO>(Func<T, TO> func) where TO : class => new None<TO>();
         public Option<TO> Map<TO>(Func<T, TO?> func) where TO : struct => new None<TO>();
 
