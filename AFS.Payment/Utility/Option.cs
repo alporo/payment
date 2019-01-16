@@ -65,7 +65,6 @@ namespace AFS.Payment.Utility
     {
         public static Option<T> AsOption<T>(this T value)
             where T : class => value != null ? new Some<T>(value) : new None<T>() as Option<T>;
-
         public static Option<T> AsOption<T>(this T? value) where T : struct =>
             value == null ? new None<T>() : new Some<T>(value.Value) as Option<T>;
         public static T OrThrow<T>(this Option<T> maybe, string message) =>

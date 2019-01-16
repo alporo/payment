@@ -4,42 +4,63 @@
     ViewBag.Title = "Order";
 }
 
-<h2>Order details</h2>
-
-<div>
-    <h4>Summary</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Fullname)</dt>
-        <dd>@Html.DisplayFor(model => model.Fullname)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Total)</dt>
-        <dd>@Html.DisplayFor(model => model.Total)</dd>
-    </dl>
-</div>
-<div>
-    <h4>Items</h4>
-    <hr />
-    <div class="row">
-        <div class="col-md-2"> <strong>Product</strong></div>
-        <div class="col-md-2"> <strong>Quantity</strong></div>
-        <div class="col-md-2"> <strong>Price</strong></div>
-    </div>
-    @foreach (var item in Model.Items)
-    {
-        <div class="row">
-            <div class="col-md-2"> @Html.DisplayFor(modelItem => item.Product)</div>
-            <div class="col-md-2"> @Html.DisplayFor(modelItem => item.Quantity)</div>
-            <div class="col-md-2"> @Html.DisplayFor(modelItem => item.Price)</div>
+<div class="container">
+    <h2>Order details</h2>
+    <div class="card mt-3">
+        <div class="card-header">
+            Summary
         </div>
-    }
-</div>
-<div>
-    <h4>Payment</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Fullname)</dt>
-        <dd>@Html.DisplayFor(model => model.Fullname)</dd>
-        <dt>@Html.DisplayNameFor(model => model.Total)</dt>
-        <dd>@Html.DisplayFor(model => model.Total)</dd>
-    </dl>
+        <div class="card-body">
+            <form>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(model => model.Fullname)</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" value="@Model.Fullname">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(model => model.Total)</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" value="@Model.Total">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">@Html.DisplayNameFor(model => model.Status)</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" value="@Model.Status">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header">
+            Items
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                @{ int c = 0; }
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+                        <th scope="row">@Html.Raw(c++)</th>
+                        <td>@item.Product</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    @Html.Partial("_CreditCard", Model.CreditCardModel)
 </div>

@@ -5,12 +5,12 @@
 
 <div class="jumbotron">
     <h1>
-        Simplified payment <img class="commectial-pict-big" src="../../Content/pict/devices.png">
+        Simplified payment <img class="commercial-pict-big" src="../../Content/pict/devices.png">
     </h1>
 </div>
 <div class="card">
     <div class="card-body">
-        @using (Html.BeginForm("Order", "Payment", FormMethod.Post, new { @class = "toOrderForm" }))
+        @using (Html.BeginForm("Order", "Payment", FormMethod.Post, new {@class = "toOrderForm"}))
         {
             @Html.HiddenFor(m => m.OrderId)
             @Html.HiddenFor(m => m.DateOfBirthString)
@@ -23,26 +23,23 @@
             </div>
             <div class="row">
                 <div class="col-md-3" id="dtp">
-                    <div class="input-group date">
-                        <input type="text" class="form-control" placeholder="Date of birth">
-                        <span class="input-group-addon">
-                            <i>D</i>
-                        </span>
-                    </div>
+                    <input type="text" class="form-control" placeholder="Date of birth">
                     @Html.ValidationMessageFor(m => m.DateOfBirthString)
                 </div>
-                <button type="submit" class="btn btn-primary">Order details</button>
+                <div class="col-md-3">
+                    <button type="submit" class="btn btn-primary">Order details</button>
+                </div>
+                
             </div>
         }
     </div>
 </div>
 
 
-
 <div class="row">
     <div class="col-md-4">
         <h2>
-            <img class="commectial-pict" src="../../Content/pict/secure.png"> Secure
+            <img class="commercial-pict" src="../../Content/pict/secure.png"> Secure
         </h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus ornare posuere.
@@ -56,7 +53,7 @@
     </div>
     <div class="col-md-4">
         <h2>
-            <img class="commectial-pict" src="../../Content/pict/reliable.png"> Reliable
+            <img class="commercial-pict" src="../../Content/pict/reliable.png"> Reliable
         </h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a neque sit amet mi pretium auctor.
@@ -70,7 +67,7 @@
     </div>
     <div class="col-md-4">
         <h2>
-            <img class="commectial-pict" src="../../Content/pict/dynamic.png"> Dynamic
+            <img class="commercial-pict" src="../../Content/pict/dynamic.png"> Dynamic
         </h2>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -89,12 +86,12 @@
 {
     <script>
         $(document).ready(function() {
-            var dtp = $('#dtp .input-group.date').datepicker({
+            var dtp = $('#dtp input').datepicker({
                 format: 'dd.mm.yyyy',
                 autoclose: true
             });
             dtp.on('changeDate',
-                function (e) {
+                function(e) {
                     $('#DateOfBirthString').val(Date.parse(e.date));
                 });
             $(".toOrderForm").data("validator").settings.ignore = "";

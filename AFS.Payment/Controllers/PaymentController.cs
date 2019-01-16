@@ -40,5 +40,8 @@ namespace AFS.Payment.Controllers
                     ViewBag.ErrorMessage = "Date of birth is invalid";
                     return Welcome(orderId);
                 });
+
+        [HttpPost]
+        public ActionResult Pay(CreditCardModel creditCard) => RedirectToAction("GenerateLink");
     }
 }

@@ -37,6 +37,17 @@ namespace AFS.Payment.Test.Unit
         }
 
         [Test]
+        public void ViewDoesNotUpdatePaidStatus()
+        {
+            var provider = new Mock<OrderProvider>();
+            provider.Setup(p => p.GetBy(It.IsAny<Guid>(), It.IsAny<DateTime>()))
+                .Returns(new Order { Status = OrderStatus.Paid });
+            var status = new Orders(provider.Object).View(Guid.NewGuid(), DateTime.Now)
+                .Map(o => o.Status as OrderStatus?).OrElse(null);
+            Assert.AreEqual(OrderStatus.Paid, status);
+        }
+
+        [Test]
         public void ReturnRandom()
         {
             var provider = new Mock<OrderProvider>();
