@@ -153,6 +153,7 @@
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="DataAccess\Item.cs" />
     <Compile Include="DataAccess\Order.cs" />
+    <Compile Include="DataAccess\OrderProvider.cs" />
     <Compile Include="DataAccess\PaymentContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

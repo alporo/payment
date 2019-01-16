@@ -20,5 +20,6 @@ namespace AFS.Payment.DataAccess
     {
         New,
         Viewed,
+        Paid,
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using AFS.Payment.BusinessObjects;
 using AFS.Payment.DataAccess;
+using Moq;
 using NUnit.Framework;
 
 namespace AFS.Payment.Test.Unit
@@ -9,29 +9,47 @@ namespace AFS.Payment.Test.Unit
     [TestFixture]
     public class OrdersTests
     {
-        //[TestCase("{F51555EC-E569-4E2F-A596-6B3433928FDE}", true)]
-        //[TestCase("{0F874C95-014F-4F37-BD9A-D71E49C9F89F}", false)]
-        //public void SearchOrderById(string guid, bool expected)
-        //{
-        //    var ordersDummy = new List<Order> {new Order {Id = new Guid("{F51555EC-E569-4E2F-A596-6B3433928FDE}")}};
-        //    Assert.AreEqual(expected, new Orders(ordersDummy).GetBy(new Guid(guid)).HasValue());
-        //}
+        [Test]
+        public void OrderById()
+        {
+            var provider = new Mock<OrderProvider>();
+            provider.Setup(p => p.GetBy(It.IsAny<Guid>())).Returns(new Order());
+            Assert.IsTrue(new Orders(provider.Object).GetBy(Guid.NewGuid()).HasValue());
+        }
 
-        //[TestCase("{F51555EC-E569-4E2F-A596-6B3433928FDE}", true)]
-        //[TestCase("{0F874C95-014F-4F37-BD9A-D71E49C9F89F}", false)]
-        //public void SearchOrderByModel(string guid, bool expected)
-        //{
-        //    var g = new Guid(guid);
-        //    var ordersDummy = new List<Order>
-        //    {
-        //        new Order
-        //        {
-        //            Id = new Guid("{F51555EC-E569-4E2F-A596-6B3433928FDE}"),
-        //            DateOfBirth = new DateTime(1980, 2, 23, 10, 14, 2)
-        //        }
-        //    };
-        //    Assert.AreEqual(expected,
-        //        new Orders(ordersDummy).GetBy(g, new DateTime(1980, 2, 23)).HasValue());
-        //}
+        [Test]
+        public void OrderByIdNotFound()
+        {
+            var provider = new Mock<OrderProvider>();
+            provider.Setup(p => p.GetBy(It.IsAny<Guid>())).Returns(null as Order);
+            Assert.IsFalse(new Orders(provider.Object).GetBy(Guid.NewGuid()).HasValue());
+        }
+
+        [Test]
+        public void ViewUpdatesStatus()
+        {
+            var provider = new Mock<OrderProvider>();
+            provider.Setup(p => p.GetBy(It.IsAny<Guid>(), It.IsAny<DateTime>()))
+                .Returns(new Order {Status = OrderStatus.New});
+            var status = new Orders(provider.Object).View(Guid.NewGuid(), DateTime.Now)
+                .Map(o => o.Status as OrderStatus?).OrElse(null);
+            Assert.AreEqual(OrderStatus.Viewed, status);
+        }
+
+        [Test]
+        public void ReturnRandom()
+        {
+            var provider = new Mock<OrderProvider>();
+            provider.Setup(p => p.GetRandom()).Returns(new Order());
+            Assert.IsTrue(new Orders(provider.Object).GetRandom().HasValue());
+        }
+
+        [Test]
+        public void ReturnRandomNothing()
+        {
+            var provider = new Mock<OrderProvider>();
+            provider.Setup(p => p.GetRandom()).Returns(null as Order);
+            Assert.IsFalse(new Orders(provider.Object).GetRandom().HasValue());
+        }
     }
 }

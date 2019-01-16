@@ -11,8 +11,8 @@ namespace AFS.Payment.DataAccess
             Configuration.ProxyCreationEnabled = false;
         }
 
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Item> Items { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

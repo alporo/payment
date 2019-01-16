@@ -52,7 +52,8 @@ namespace AFS.Payment.Migrations
                 new Order
                 {
                     Id = new Guid("7BC69EB6-805F-45DB-8B7F-89B3E7580549"),
-                    DateOfBirth = new DateTime(1963 , 6, 9),
+                    //time is set here for testing purposes
+                    DateOfBirth = new DateTime(1963 , 6, 9, 10, 10, 10),
                     FirstName = "Jack",
                     LastName = "Sparrow",
                     Total = 12075,

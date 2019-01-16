@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
 using AFS.Payment.DataAccess;
 using AFS.Payment.Utility;
 
@@ -9,34 +6,28 @@ namespace AFS.Payment.BusinessObjects
 {
     public class Orders
     {
-        private readonly PaymentContext _context;
+        private readonly OrderProvider _provider;
 
-        private DbSet<Order> OrderSet => _context.Set<Order>();
-
-        public Orders(PaymentContext context)
+        public Orders(OrderProvider provider)
         {
-            _context = context;
+            _provider = provider;
         }
 
-        public Orders() : this(new PaymentContext())
+        public Orders() : this(new OrderProvider())
         {
         }
 
-        public Option<Order> GetBy(Guid orderId) => OrderSet.SingleOrDefault(o => o.Id == orderId).AsOption();
-        public Option<Order> View(Guid orderId, DateTime dateOfBirth)
-            => OrderSet.Include(o => o.Items).SingleOrDefault(o =>
-                    o.Id == orderId && dateOfBirth.Date == DbFunctions.TruncateTime(o.DateOfBirth))
-                .AsOption().Map(Viewed);
+        public Option<Order> GetBy(Guid orderId) => _provider.GetBy(orderId).AsOption();
+        public Option<Order> View(Guid orderId, DateTime dateOfBirth) =>
+            _provider.GetBy(orderId, dateOfBirth).AsOption().Map(OrderViewed);
 
-        private Order Viewed(Order order)
+        private void OrderViewed(Order order)
         {
-            if (order.Status == OrderStatus.New)
-                order.Status = order.Status;
-            OrderSet.AddOrUpdate();
-            _context.SaveChanges();
-            return order;
+            if (order.Status != OrderStatus.New) return;
+            order.Status = OrderStatus.Viewed;
+            _provider.SaveStatus(order);
         }
 
-        public Option<Order> GetRandom() => OrderSet.OrderBy(o => Guid.NewGuid()).FirstOrDefault().AsOption();
+        public Option<Order> GetRandom() => _provider.GetRandom().AsOption();
     }
 }
