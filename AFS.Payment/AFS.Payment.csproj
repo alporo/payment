@@ -146,7 +146,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BusinessObjects\CardValidator\JsonPlaceholderValidator.cs" />
+    <Compile Include="BusinessObjects\CardValidation\ValidationResult.cs" />
     <Compile Include="BusinessObjects\Orders.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="DataAccess\Item.cs" />
@@ -161,9 +161,7 @@
       <DependentUpon>201901140059571_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="BusinessObjects\CardValidator\BinCodesValidator.cs" />
-    <Compile Include="BusinessObjects\CardValidator\CardValidator.cs" />
-    <Compile Include="BusinessObjects\CreditCard.cs" />
+    <Compile Include="BusinessObjects\CardValidation\BinCodesValidator.cs" />
     <Compile Include="Models\CreditCardModel.cs" />
     <Compile Include="Models\GenerateLinkModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
@@ -352,7 +350,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Payment\About.cshtml" />
     <Content Include="Views\Payment\Welcome.cshtml" />
     <Content Include="Views\Payment\Order.cshtml" />
     <Content Include="Views\Payment\GenerateLink.cshtml" />
@@ -368,6 +365,7 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Payment\_CreditCard.cshtml" />
+    <Content Include="Views\Payment\ThankYou.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

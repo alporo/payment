@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using AFS.Payment.BusinessObjects;
+using AFS.Payment.BusinessObjects.CardValidation;
 using AFS.Payment.Models;
 
 namespace AFS.Payment.Controllers
@@ -8,13 +9,15 @@ namespace AFS.Payment.Controllers
     public class PaymentController : Controller
     {
         private readonly Orders _orders;
+        private readonly BinCodesValidator _cardValidator;
 
-        public PaymentController(Orders orders)
+        public PaymentController(Orders orders, BinCodesValidator cardValidator)
         {
             _orders = orders;
+            _cardValidator = cardValidator;
         }
 
-        public PaymentController() : this(new Orders())
+        public PaymentController() : this(new Orders(), new BinCodesValidator())
         {
         }
 
@@ -42,6 +45,6 @@ namespace AFS.Payment.Controllers
                 });
 
         [HttpPost]
-        public ActionResult Pay(CreditCardModel creditCard) => RedirectToAction("GenerateLink");
+        public ActionResult Pay(CreditCardModel creditCard) => View("ThankYou");
     }
 }

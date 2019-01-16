@@ -65,7 +65,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Integration\JsonPlaceholderValidatorTests.cs" />
+    <Compile Include="Integration\BinCodesValidatorTests.cs" />
     <Compile Include="Integration\OrderProviderTests.cs" />
     <Compile Include="Integration\OrdersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,7 +73,9 @@
     <Compile Include="Unit\WelcomeModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -82,7 +84,6 @@
       <Name>AFS.Payment</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -30,7 +30,7 @@ namespace AFS.Payment.Test.Unit
         {
             var provider = new Mock<OrderProvider>();
             provider.Setup(p => p.GetBy(It.IsAny<Guid>(), It.IsAny<DateTime>()))
-                .Returns(new Order {Status = OrderStatus.New});
+                .Returns(new Order { Status = OrderStatus.New });
             var status = new Orders(provider.Object).View(Guid.NewGuid(), DateTime.Now)
                 .Map(o => o.Status as OrderStatus?).OrElse(null);
             Assert.AreEqual(OrderStatus.Viewed, status);

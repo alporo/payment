@@ -10,5 +10,7 @@ namespace AFS.Payment.Models
 
         [Required(ErrorMessage = "Field is required"), MinLength(15, ErrorMessage = "Minimum 19 digits"), MaxLength(19, ErrorMessage = "Maximum 19 digits")]
         public string Number { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
     }
 }

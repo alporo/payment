@@ -34,7 +34,7 @@ namespace AFS.Payment.Test.Integration
             var provider = new OrderProvider();
             var initialStatus = provider.GetBy(orderId).Status;
             var newStatus = initialStatus != OrderStatus.Paid ? OrderStatus.Paid : OrderStatus.Viewed;
-            var order = new Order{Id = orderId, Status = newStatus };
+            var order = new Order { Id = orderId, Status = newStatus };
             provider.SaveStatus(order);
             Assert.AreEqual(newStatus, provider.GetBy(orderId).Status);
 
