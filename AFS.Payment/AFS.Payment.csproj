@@ -146,6 +146,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BusinessObjects\CardValidation\AlwaysValidValidator.cs" />
+    <Compile Include="BusinessObjects\CardValidation\CardValidator.cs" />
     <Compile Include="BusinessObjects\CardValidation\ValidationResult.cs" />
     <Compile Include="BusinessObjects\Orders.cs" />
     <Compile Include="Controllers\PaymentController.cs" />

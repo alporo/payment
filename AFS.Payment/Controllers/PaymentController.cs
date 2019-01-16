@@ -9,15 +9,15 @@ namespace AFS.Payment.Controllers
     public class PaymentController : Controller
     {
         private readonly Orders _orders;
-        private readonly BinCodesValidator _cardValidator;
+        private readonly CardValidator _cardValidator;
 
-        public PaymentController(Orders orders, BinCodesValidator cardValidator)
+        public PaymentController(Orders orders, CardValidator cardValidator)
         {
             _orders = orders;
             _cardValidator = cardValidator;
         }
 
-        public PaymentController() : this(new Orders(), new BinCodesValidator())
+        public PaymentController() : this(new Orders(), new AlwaysValidValidator())
         {
         }
 
@@ -37,7 +37,7 @@ namespace AFS.Payment.Controllers
 
         public ActionResult Order(Guid orderId, DateTime dateOfBirth) =>
             _orders.View(orderId, dateOfBirth)
-                .Map(o => View(new OrderModel(o)) as ActionResult)
+                .Map(o => View("Order", new OrderModel(o)) as ActionResult)
                 .OrElse(() =>
                 {
                     ViewBag.ErrorMessage = "Date of birth is invalid";
@@ -45,6 +45,13 @@ namespace AFS.Payment.Controllers
                 });
 
         [HttpPost]
-        public ActionResult Pay(CreditCardModel creditCard) => View("ThankYou");
+        public ActionResult Pay(CreditCardModel creditCard)
+        {
+            var validationResult = _cardValidator.Validate(creditCard.Number);
+            if (validationResult.PaymentSuccessful)
+                return View("ThankYou");
+            ViewBag.ErrorMessage = validationResult.ErrorMessage;
+            return _orders.GetBy(creditCard.OrderId).Map(o => Order(o.Id, o.DateOfBirth)).OrElse(View("Error"));
+        }
     }
 }

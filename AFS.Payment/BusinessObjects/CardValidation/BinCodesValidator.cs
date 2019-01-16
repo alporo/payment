@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace AFS.Payment.BusinessObjects.CardValidation
 {
-    public class BinCodesValidator
+    public class BinCodesValidator : CardValidator
     {
         private string ApiRequest(string number) =>
             $"https://api.bincodes.com/cc/?format=json&api_key={Settings.Default.BinCodesApiKey}&cc={number}";
@@ -27,7 +27,7 @@ namespace AFS.Payment.BusinessObjects.CardValidation
             return response.ToValidationResult(number);
         }
 
-        public string GetResponse(string apiRequest)
+        private string GetResponse(string apiRequest)
         {
             using (var httpClient = new HttpClient())
             {
@@ -53,9 +53,9 @@ namespace AFS.Payment.BusinessObjects.CardValidation
             public string Message { get; set; }
 
             private bool IsValid => Valid?.ToLower() == "true";
-            private string ErrorWithMessage => Error != null ? $"{Error} - {Message}" : string.Empty;
+            private string FormattedError => Error != null ? Message : string.Empty;
 
-            public ValidationResult ToValidationResult(string number) => new ValidationResult(number, Card, IsValid, ErrorWithMessage);
+            public ValidationResult ToValidationResult(string number) => new ValidationResult(number, Card, IsValid, FormattedError);
         }
     }
 }

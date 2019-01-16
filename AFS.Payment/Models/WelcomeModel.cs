@@ -13,7 +13,6 @@ namespace AFS.Payment.Models
         public string DateOfBirthString { get; set; }
 
         public DateTime DateOfBirth => DateOfBirthString.TicksToDate().OrThrow(new Exception("Date invalid")).Date;
-        public bool DateInvalid { get; set; }
     }
 
     public class ValidateDateFormat : ValidationAttribute

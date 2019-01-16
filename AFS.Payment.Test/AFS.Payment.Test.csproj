@@ -70,6 +70,7 @@
     <Compile Include="Integration\OrdersTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Unit\OrdersTests.cs" />
+    <Compile Include="Unit\ValidationResultTests.cs" />
     <Compile Include="Unit\WelcomeModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
