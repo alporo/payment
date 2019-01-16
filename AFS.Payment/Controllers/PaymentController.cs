@@ -17,7 +17,7 @@ namespace AFS.Payment.Controllers
             _cardValidator = cardValidator;
         }
 
-        public PaymentController() : this(new Orders(), new AlwaysValidValidator())
+        public PaymentController() : this(new Orders(), new BinCodesValidator())
         {
         }
 
@@ -47,6 +47,8 @@ namespace AFS.Payment.Controllers
         [HttpPost]
         public ActionResult Pay(CreditCardModel creditCard)
         {
+            if(!ModelState.IsValid)
+                return View("Error");
             var validationResult = _cardValidator.Validate(creditCard.Number);
             if (validationResult.PaymentSuccessful)
                 return View("ThankYou");
