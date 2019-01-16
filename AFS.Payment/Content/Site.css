@@ -23,11 +23,13 @@ select,
 textarea { max-width: 280px; }
 
 .commercial-pict {
-    height: 65px;
+    max-height: 100px;
 }
+
 .commercial-pict-big {
-    height: 130px;
+    height: 150px;
 }
+
 .field-validation-error {
     color: #ff0000;
 }
