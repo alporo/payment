@@ -10,3 +10,4 @@ For such case, there is AlwaysValidValidator prepared that always sucessfully va
 
 # A comment
 1. Everything lies in one MVC project, without splitting into several projects. It is done just for simplicity, as project is tiny.
+2. BinCodesValidator is not tested properly, as long as I have never received valid API key. Hopefully, just inserting a valid API key to web.config will work, but without proper testing you never know.
